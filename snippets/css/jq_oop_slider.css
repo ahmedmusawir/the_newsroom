@@ -1,0 +1,32 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+figure.image {
+	width: 600px;
+	height: 300px;
+	text-align: center;
+	font-size: 2em;
+	background: #e3e3e3;
+	border: 2px solid grey;
+}
+
+article.slider {
+	width: 600px;
+	margin: 0 auto;
+	margin-top: 3em;
+	overflow: hidden;
+}
+article.slider ul {
+	width: 10000px;
+	list-style: none;
+}
+article.slider ul li {
+	float: left;
+}
+
+div.slider_nav p {
+	margin: 1em auto;
+	width: 600px;
+}

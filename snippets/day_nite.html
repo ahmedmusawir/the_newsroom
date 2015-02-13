@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>jQ Envato Part One</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+  </head>
+  <body>
+    <p><button type="button" class="btn btn-success" data-value="css/bootstrap">BootStrap</button>
+       <button type="button" class="btn btn-success" data-value="css/bootstrap.min">Metro</button>
+    </p>
+    <br>
+    <hr>
+    <ul>
+        <li class="btn btn-danger">Hello, world!</li>
+        <li class="btn btn-warning">Hello, world!</li>
+        <li class="btn btn-primary">Hello, world!</li>
+        <li class="btn btn-info">Hello, world!</li>
+    </ul>
+    <script src="js/jquery-2.0.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+
+          var link = $('link');
+
+          $('button').on('click', function () {
+              var $this = $(this);
+              var style = $this.data('value');
+              
+
+              link.attr('href', style + '.css');
+
+              $this
+              .siblings('button').removeAttr("disabled")
+              .end()
+              .attr('disabled', 'disabled');
+          });
+
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+[
+	{
+		"title": "The Buddha",
+		"author": {"first":"Karen", "last":"Armstrong"},
+		"image": "img/jq_temp_image_1.jpg",
+		"age": "45"
+	},
+	{
+		"title": "The Power of Now",
+		"author": {"first":"Echart", "last":"Tolly"},
+		"image": "img/jq_temp_image_2.jpg",
+		"age": "46"
+	},
+	{
+		"title": "Out of Your Mind",
+		"author": {"first":"Alan", "last":"Watts"},
+		"image": "img/jq_temp_image_3.jpg",
+		"age": "56"
+	},
+	{
+		"title": "The God Delusion",
+		"author": {"first":"Richart", "last":"Dawson"},
+		"image": "img/jq_temp_image_4.jpg",
+		"age": "65"
+	}	
+]

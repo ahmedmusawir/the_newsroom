@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>jQ News Room</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+
+    <style type="text/css">
+      img {
+        padding-right: 1.5em;
+      }
+    </style>
+  </head>
+  <body class="container">
+    <h1 class="jumbotron">:: The News Room :: <small>jQ - Deffered - Ajax </small></h1>
+    <section class="content">
+                  <div class="row well">
+
+                    <button type="button" class="btn  btn-block btn-primary" data-toggle="collapse" data-target="#run_code_1">View Code</button>
+
+                    <article id="run_code_1" class="collapse">
+
+                      <div class="thumbnail"> 
+
+                      <?php include('../code_view/cv1.php'); ?>
+
+                      </div>
+                    </article>
+
+                  </div> <!-- row -->
+      </section> <!-- content -->
+      <hr>
+      <div class="alert alert-danger">
+        <select class="form-control" id="news">
+          <option value="topstories">Top Stories</option>
+          <option value="world">World</option>
+          <option value="us">U.S.</option>
+          <option value="politics">Politics</option>
+          <option value="tech">Tech</option>
+          <option value="entertainment">Entertainment</option>
+          <option value="business">Business</option>
+        </select>
+      </div>
+
+    <article id="output"><img alt="" src="img/the_newsroom.png"></article>
+
+    <script src="js/jquery-2.0.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      function getVals() {
+        var singleValues = $( "#news" ).val();
+
+        return singleValues;
+      }
+
+      $('#news').on('change', function () {
+
+                // ======================================
+                // JQ DEFFERED WITH SET ajax({}) NEWS
+                // ======================================
+
+                var myFun = function (arg) {
+                
+                console.log('newsTitle in myFun: ' + arg);
+                  var newsTitle = encodeURIComponent(arg);
+                  var rss = "http://rss.news.yahoo.com/rss/"+newsTitle;
+                  var query = encodeURIComponent('select * from rss where url="'+rss+'"');
+                  var yql = 'http://query.yahooapis.com/v1/public/yql?q='+query+'&format=json&diagnostics=true&callback=?';
+
+                  return  $.ajax({
+                      url: yql,
+                      dataType: 'jsonp'
+                    }).promise();
+
+                  }
+
+                  var title = getVals();
+                  console.log('newsTitle: ' + title);
+
+                 myFun(title).then(function (data) {
+                  // console.log(data);
+                  // console.log(data.query.results.item);
+                  var newsTitles = data.query.results.item;
+                    
+                    $('#output').text('');
+                        $.each(newsTitles, function (index, val) {
+
+                            // console.log(val.title);
+                            // console.log(val.description);
+                            // console.log(val.link);
+                            // console.log(val.pubDate);
+
+                            if(val.title){
+                              $('#output').append("<h4 class='alert alert-info'>" + val.title + "</h4>");
+                              $('#output').append("<h5 class='label label-default'>" + val.pubDate + "</h5>");
+                              $('#output').append("<h6 class='well'>" + val.description + "</h6>");
+                              $('#output').append("<a class='label label-danger' href='"+ val.link +"'>" + val.link +  "<a>");
+                            }else{
+                              $('#output').append("<h4>Nothing Found</h4>");
+
+                            }  
+                    });
+         });
+
+
+      });
+
+    </script>
+  </body>
+</html>
